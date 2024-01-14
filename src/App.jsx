@@ -3,6 +3,9 @@ import Home from "./pages/Home"
 import Login from "./pages/auth/Login"
 import AdminLayout from "./layouts/AdminLayout"
 import Dashboard from "./pages/dashboard/Dashboard"
+import CategoryList from "./pages/category/CategoryList"
+import AddCategory from "./pages/category/AddCategory"
+import EditCategory from "./pages/category/EditCategory"
 
 
 const App = () => {
@@ -22,10 +25,20 @@ const App = () => {
           path="/admin"
           element={<AdminLayout children={<Dashboard/>}/>}
         />
+
         <Route
           path="/admin/category"
-          element={<AdminLayout/>}
+          element={<AdminLayout children={<CategoryList/>}/>}
         />
+        <Route
+          path="/admin/category/add"
+          element={<AdminLayout children={<AddCategory/>}/>}
+        />
+        <Route
+          path="/admin/category/edit/"
+          element={<AdminLayout children={<EditCategory/>}/>}
+        />
+
         <Route
           path="/admin/product"
           element={<AdminLayout/>}
