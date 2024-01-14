@@ -9,6 +9,9 @@ import EditCategory from "./pages/category/EditCategory"
 import RoleList from "./pages/role/RoleList"
 import AddRole from "./pages/role/AddRole"
 import EditRole from "./pages/role/EditRole"
+import UserList from "./pages/user/UserList"
+import AddUser from "./pages/user/AddUser"
+import EditUser from "./pages/user/EditUser"
 
 
 const App = () => {
@@ -70,7 +73,15 @@ const App = () => {
 
         <Route
           path="/admin/user"
-          element={<AdminLayout/>}
+          element={<AdminLayout children={<UserList/>}/>}
+        />
+        <Route
+          path="/admin/user/add"
+          element={<AdminLayout children={<AddUser/>}/>}
+        />
+        <Route
+          path="/admin/user/edit"
+          element={<AdminLayout children={<EditUser/>}/>}
         />
 
       </Routes>
