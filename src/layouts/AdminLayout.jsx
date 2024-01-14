@@ -7,7 +7,7 @@ const AdminLayout = ({children}) => {
     <>
       <SidebarSection menu={sidebarMenu}/>
       <NavbarSection/>
-      <main className="p-6">
+      <main className="pl-64 pr-8 py-6">
         {children}
       </main>
     </>

@@ -1,7 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
-import Login from "./pages/Login"
-import AdminLayout from "./layouts/AdminLayout"
 import Home from "./pages/Home"
+import Login from "./pages/auth/Login"
+import AdminLayout from "./layouts/AdminLayout"
+import Dashboard from "./pages/dashboard/Dashboard"
+
 
 const App = () => {
   return (
@@ -18,7 +20,7 @@ const App = () => {
 
         <Route
           path="/admin"
-          element={<AdminLayout/>}
+          element={<AdminLayout children={<Dashboard/>}/>}
         />
         <Route
           path="/admin/category"

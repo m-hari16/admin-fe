@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import { login } from "../data/api";
+import { useNavigate } from "react-router-dom";
+import { login } from "../../data/api";
 
 const Login = () => {
   const navigate = useNavigate();
