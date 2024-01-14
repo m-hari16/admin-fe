@@ -1,8 +1,8 @@
-const EditStock = () => {
+const AddPurchase = () => {
   return(
     <>
       <div className="text-lg font-semibold mb-6">
-        <h1>Edit Stock Product</h1>
+        <h1>Purchsae New Product</h1>
       </div>
 
       <div className="flex p-5 bg-white">
@@ -11,42 +11,27 @@ const EditStock = () => {
             <label
               className="mb-2 block text-gray-950 text-[13px] font-sans font-semibold"
             >
-              Product Code
+              Product Name
             </label>
-            <input
-              value={'P-8972378'}
-              readOnly
+            <select
               placeholder="Product code"
               type="text"
-              name="code"
+              name="product_id"
               id="code"
               className="w-96 rounded-md border bg-[#F7F7F7] py-3 px-6 text-base font-sans text-text-100"
-            />
+            >
+              <option>Kertas A4</option>
+            </select>
           </div>
 
           <div className="mb-5">
             <label
               className="mb-2 block text-gray-950 text-[13px] font-sans font-semibold"
             >
-              Product Name
+              Quantity
             </label>
             <input
               placeholder="Product name"
-              type="text"
-              name="name"
-              id="name"
-              className="w-96 rounded-md border bg-[#F7F7F7] py-3 px-6 text-base font-sans text-text-100"
-            />
-          </div>
-
-          <div className="mb-5">
-            <label
-              className="mb-2 block text-gray-950 text-[13px] font-sans font-semibold"
-            >
-              Stock
-            </label>
-            <input
-              placeholder="1000"
               type="number"
               name="qty"
               id="qty"
@@ -58,13 +43,13 @@ const EditStock = () => {
             <label
               className="mb-2 block text-gray-950 text-[13px] font-sans font-semibold"
             >
-              UoM
+              Price Total
             </label>
             <input
-              placeholder="m3 or pcs"
-              type="text"
-              name="uom"
-              id="uom"
+              placeholder="Product name"
+              type="number"
+              name="price"
+              id="price"
               className="w-96 rounded-md border bg-[#F7F7F7] py-3 px-6 text-base font-sans text-text-100"
             />
           </div>
@@ -83,4 +68,4 @@ const EditStock = () => {
   )
 }
 
-export default EditStock
+export default AddPurchase

@@ -17,6 +17,9 @@ import AddProduct from "./pages/product/AddProduct"
 import EditProduct from "./pages/product/EditProduct"
 import StockList from "./pages/stock/StockList"
 import EditStock from "./pages/stock/EditStock"
+import PurchaseList from "./pages/purchase/PurchaseList"
+import AddPurchase from "./pages/purchase/AddPurchase"
+import EditPurchase from "./pages/purchase/EditPurchase"
 
 
 const App = () => {
@@ -74,7 +77,15 @@ const App = () => {
 
         <Route
           path="/admin/purchase"
-          element={<AdminLayout/>}
+          element={<AdminLayout children={<PurchaseList/>}/>}
+        />
+        <Route
+          path="/admin/purchase/add"
+          element={<AdminLayout children={<AddPurchase/>}/>}
+        />
+        <Route
+          path="/admin/purchase/edit"
+          element={<AdminLayout children={<EditPurchase/>}/>}
         />
 
         <Route
