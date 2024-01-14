@@ -15,6 +15,8 @@ import EditUser from "./pages/user/EditUser"
 import ProductList from "./pages/product/ProductList"
 import AddProduct from "./pages/product/AddProduct"
 import EditProduct from "./pages/product/EditProduct"
+import StockList from "./pages/stock/StockList"
+import EditStock from "./pages/stock/EditStock"
 
 
 const App = () => {
@@ -63,8 +65,13 @@ const App = () => {
 
         <Route
           path="/admin/stock"
-          element={<AdminLayout/>}
+          element={<AdminLayout children={<StockList/>}/>}
         />
+        <Route
+          path="/admin/stock/edit"
+          element={<AdminLayout children={<EditStock/>}/>}
+        />
+
         <Route
           path="/admin/purchase"
           element={<AdminLayout/>}
