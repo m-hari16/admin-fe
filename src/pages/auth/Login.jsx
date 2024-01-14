@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { json, useNavigate } from "react-router-dom";
 import { login } from "../../data/api";
 
 const Login = () => {
@@ -21,9 +21,9 @@ const Login = () => {
 
     const postData = await login(formData)
 
-    if (postData.accessToken) {
-      localStorage.setItem('token', postData.accessToken)
-
+    if (postData.data) {
+      localStorage.setItem('token', postData.data?.access_token)
+      localStorage.setItem('user', JSON.stringify(postData.data?.user_data))
       navigate("/admin")
     }
   }

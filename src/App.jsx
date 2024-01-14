@@ -20,6 +20,7 @@ import EditStock from "./pages/stock/EditStock"
 import PurchaseList from "./pages/purchase/PurchaseList"
 import AddPurchase from "./pages/purchase/AddPurchase"
 import EditPurchase from "./pages/purchase/EditPurchase"
+import ProtectedRoute from "./utils/protectedRoute"
 
 
 const App = () => {
@@ -35,85 +36,86 @@ const App = () => {
           element={<Login/>}
         />
 
-        <Route
-          path="/admin"
-          element={<AdminLayout children={<Dashboard/>}/>}
-        />
+        <Route element={<ProtectedRoute/>}>
+          <Route
+            path="/admin"
+            element={<AdminLayout children={<Dashboard/>}/>}
+          />
 
-        <Route
-          path="/admin/category"
-          element={<AdminLayout children={<CategoryList/>}/>}
-        />
-        <Route
-          path="/admin/category/add"
-          element={<AdminLayout children={<AddCategory/>}/>}
-        />
-        <Route
-          path="/admin/category/edit/"
-          element={<AdminLayout children={<EditCategory/>}/>}
-        />
+          <Route
+            path="/admin/category"
+            element={<AdminLayout children={<CategoryList/>}/>}
+          />
+          <Route
+            path="/admin/category/add"
+            element={<AdminLayout children={<AddCategory/>}/>}
+          />
+          <Route
+            path="/admin/category/edit/"
+            element={<AdminLayout children={<EditCategory/>}/>}
+          />
 
-        <Route
-          path="/admin/product"
-          element={<AdminLayout children={<ProductList/>}/>}
-        />
-        <Route
-          path="/admin/product/add"
-          element={<AdminLayout children={<AddProduct/>}/>}
-        />
-        <Route
-          path="/admin/product/edit"
-          element={<AdminLayout children={<EditProduct/>}/>}
-        />
+          <Route
+            path="/admin/product"
+            element={<AdminLayout children={<ProductList/>}/>}
+          />
+          <Route
+            path="/admin/product/add"
+            element={<AdminLayout children={<AddProduct/>}/>}
+          />
+          <Route
+            path="/admin/product/edit"
+            element={<AdminLayout children={<EditProduct/>}/>}
+          />
 
-        <Route
-          path="/admin/stock"
-          element={<AdminLayout children={<StockList/>}/>}
-        />
-        <Route
-          path="/admin/stock/edit"
-          element={<AdminLayout children={<EditStock/>}/>}
-        />
+          <Route
+            path="/admin/stock"
+            element={<AdminLayout children={<StockList/>}/>}
+          />
+          <Route
+            path="/admin/stock/edit"
+            element={<AdminLayout children={<EditStock/>}/>}
+          />
 
-        <Route
-          path="/admin/purchase"
-          element={<AdminLayout children={<PurchaseList/>}/>}
-        />
-        <Route
-          path="/admin/purchase/add"
-          element={<AdminLayout children={<AddPurchase/>}/>}
-        />
-        <Route
-          path="/admin/purchase/edit"
-          element={<AdminLayout children={<EditPurchase/>}/>}
-        />
+          <Route
+            path="/admin/purchase"
+            element={<AdminLayout children={<PurchaseList/>}/>}
+          />
+          <Route
+            path="/admin/purchase/add"
+            element={<AdminLayout children={<AddPurchase/>}/>}
+          />
+          <Route
+            path="/admin/purchase/edit"
+            element={<AdminLayout children={<EditPurchase/>}/>}
+          />
 
-        <Route
-          path="/admin/role"
-          element={<AdminLayout children={<RoleList/>}/>}
-        />
-        <Route
-          path="/admin/role/add"
-          element={<AdminLayout children={<AddRole/>}/>}
-        />
-        <Route
-          path="/admin/role/edit"
-          element={<AdminLayout children={<EditRole/>}/>}
-        />
+          <Route
+            path="/admin/role"
+            element={<AdminLayout children={<RoleList/>}/>}
+          />
+          <Route
+            path="/admin/role/add"
+            element={<AdminLayout children={<AddRole/>}/>}
+          />
+          <Route
+            path="/admin/role/edit"
+            element={<AdminLayout children={<EditRole/>}/>}
+          />
 
-        <Route
-          path="/admin/user"
-          element={<AdminLayout children={<UserList/>}/>}
-        />
-        <Route
-          path="/admin/user/add"
-          element={<AdminLayout children={<AddUser/>}/>}
-        />
-        <Route
-          path="/admin/user/edit"
-          element={<AdminLayout children={<EditUser/>}/>}
-        />
-
+          <Route
+            path="/admin/user"
+            element={<AdminLayout children={<UserList/>}/>}
+          />
+          <Route
+            path="/admin/user/add"
+            element={<AdminLayout children={<AddUser/>}/>}
+          />
+          <Route
+            path="/admin/user/edit"
+            element={<AdminLayout children={<EditUser/>}/>}
+          />
+        </Route>
       </Routes>
     </Router>
   )
