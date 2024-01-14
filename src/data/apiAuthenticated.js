@@ -1,15 +1,4 @@
-import axios from "axios";
-import { getTokenValue } from "../utils/token";
-
-const apiBaseUrl = import.meta.env.VITE_BASE_URL
-const token = getTokenValue()
-
-const setupAxios = axios.create({
-  baseURL: apiBaseUrl,
-  headers: {
-    Authorization: `Bearer ${token}`
-  }
-})
+import setupAxios from "../utils/axiosConfig"
 
 /** Logout */
 export const logout = async () => {

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { json, useNavigate } from "react-router-dom";
 import { login } from "../../data/api";
+import setupAxios from "../../utils/axiosConfig";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -22,8 +23,13 @@ const Login = () => {
     const postData = await login(formData)
 
     if (postData.data) {
-      localStorage.setItem('token', postData.data?.access_token)
+      const token = postData.data?.access_token
+
+      localStorage.setItem('token', token)
       localStorage.setItem('user', JSON.stringify(postData.data?.user_data))
+
+      setupAxios.defaults.headers.Authorization = `Bearer ${token}`;
+      
       navigate("/admin")
     }
   }
