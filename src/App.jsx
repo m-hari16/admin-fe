@@ -6,6 +6,9 @@ import Dashboard from "./pages/dashboard/Dashboard"
 import CategoryList from "./pages/category/CategoryList"
 import AddCategory from "./pages/category/AddCategory"
 import EditCategory from "./pages/category/EditCategory"
+import RoleList from "./pages/role/RoleList"
+import AddRole from "./pages/role/AddRole"
+import EditRole from "./pages/role/EditRole"
 
 
 const App = () => {
@@ -51,10 +54,20 @@ const App = () => {
           path="/admin/purchase"
           element={<AdminLayout/>}
         />
+
         <Route
           path="/admin/role"
-          element={<AdminLayout/>}
+          element={<AdminLayout children={<RoleList/>}/>}
         />
+        <Route
+          path="/admin/role/add"
+          element={<AdminLayout children={<AddRole/>}/>}
+        />
+        <Route
+          path="/admin/role/edit"
+          element={<AdminLayout children={<EditRole/>}/>}
+        />
+
         <Route
           path="/admin/user"
           element={<AdminLayout/>}
