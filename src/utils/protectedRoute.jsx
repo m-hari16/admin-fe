@@ -1,10 +1,11 @@
 import { useEffect } from "react"
 import { Outlet, useNavigate } from "react-router-dom"
+import { isTokenExist } from "./token"
 
 const ProtectedRoute = () => {
   const navigate = useNavigate()
 
-  const token = !!localStorage.getItem('token')
+  const token = isTokenExist()
 
   useEffect(() => {
     if(!token) {

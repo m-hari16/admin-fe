@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import { logout } from "../../data/api"
+import { logout } from "../../data/apiAuthenticated"
 
 const NavbarSection = () => {
   const navigate = useNavigate()
