@@ -40,7 +40,7 @@ export const categoryUpdate = async (id, data) => {
 }
 
 export const categoryDelete = async (id) => {
-  const toApi = await setupAxios.put(`api/admin/category/${id}`)
+  const toApi = await setupAxios.delete(`api/admin/category/${id}`)
 
   return toApi.data
 }
@@ -72,7 +72,7 @@ export const productUpdate = async (id, data) => {
 }
 
 export const productDelete = async (id) => {
-  const toApi = await setupAxios.put(`api/admin/product/${id}`)
+  const toApi = await setupAxios.delete(`api/admin/product/${id}`)
 
   return toApi.data
 }

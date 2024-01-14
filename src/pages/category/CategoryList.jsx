@@ -2,8 +2,33 @@ import { Link } from "react-router-dom"
 import SearchBar from "../../components/search/SearchBar"
 import Pagination from "../../components/paging/paination"
 import { EditIcon, TrashIcon } from "../../assets"
+import { categoryDelete, categoryList } from "../../data/apiAuthenticated"
+import { useEffect, useState } from "react"
 
 const CategoryList = () => {
+  const [value, setValue] = useState(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const api = await categoryList();
+        setValue(api.data);
+      } 
+      catch (error) {}
+      finally {
+        setLoading(false);
+      }
+    }
+
+    fetchData()
+  },[])
+
+  const handleDelete = async (id) => {
+    await categoryDelete(id)
+    window.location.reload();
+  }
+
   return(
     <>
       <div className="text-lg font-semibold mb-6">
@@ -21,39 +46,52 @@ const CategoryList = () => {
           </Link>
         </div>
         <div className="flex justify-center">
-          <table className="w-full m-5">
-            <thead>
-              <tr className="h-12 bg-[#51B15C] text-white text-[14px] font-sans font-medium text-center">
-                <th className="border">No</th>
-                <th className="border">Category Name</th>
-                <th className="border">Data Created</th>
-                <th className="border">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr 
-                className="h-16 text-text-100 text-[15px] font-sans font-normal"
-              >
-                <td className="border text-center">1</td>
-                <td className="border pl-5">Alat Tulis Kantor (ATK)</td>
-                <td className="border pl-5">2024-01-13 15:00:02</td>
-                <td className="border flex justify-center h-16 space-x-2">
-                  <Link
-                    to={`/admin/category/edit?id=1`}
-                    className="w-6 h6"
-                  >
-                    <img src={`${EditIcon}`} alt="edit-data" className="w-full h-full"/>
-                  </Link>
+          {
+            loading ? 
+            (<p>Loading...</p>) : 
+            (
+              <table className="w-full m-5">
+                <thead>
+                  <tr className="h-12 bg-[#51B15C] text-white text-[14px] font-sans font-medium text-center">
+                    <th className="border">No</th>
+                    <th className="border">Category Name</th>
+                    <th className="border">Data Created</th>
+                    <th className="border">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {
+                    value.map((item, idx) => (
+                      <tr 
+                        key={idx}
+                        className="h-16 text-text-100 text-[15px] font-sans font-normal"
+                      >
+                        <td className="border text-center">{idx+1}</td>
+                        <td className="border pl-5">{item.name}</td>
+                        <td className="border pl-5">{item.created_at}</td>
+                        <td className="border flex justify-center h-16 space-x-2">
+                          <Link
+                            to={`/admin/category/edit?id=${item.id}`}
+                            state={item}
+                            className="w-6 h6"
+                          >
+                            <img src={`${EditIcon}`} alt="edit-data" className="w-full h-full"/>
+                          </Link>
 
-                  <button
-                    className="w-6 h6"
-                  >
-                    <img src={`${TrashIcon}`} alt="delete-data" className="w-full h-full"/>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                          <button
+                            onClick={() => handleDelete(item.id)}
+                            className="w-6 h6"
+                          >
+                            <img src={`${TrashIcon}`} alt="delete-data" className="w-full h-full"/>
+                          </button>
+                        </td>
+                      </tr>
+                    ))
+                  }
+                </tbody>
+              </table>
+            )
+          }
         </div>
         <div className="flex w-full justify-end pr-5">
           <Pagination/>

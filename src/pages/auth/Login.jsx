@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { json, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { login } from "../../data/api";
 import setupAxios from "../../utils/axiosConfig";
 
