@@ -1,4 +1,27 @@
+import { useLocation, useNavigate } from "react-router-dom"
+import { roleUpdate } from "../../data/apiAuthenticated"
+
 const EditRole = () => {
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  const dataFromState = location.state
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const form = event.target;
+    const name = form.name.value;
+
+    const newData = {
+      name
+    };
+
+    await roleUpdate(dataFromState.id, newData)
+
+    navigate("/admin/role")
+  }
+
   return(
     <>
       <div className="text-lg font-semibold mb-6">
@@ -6,7 +29,7 @@ const EditRole = () => {
       </div>
 
       <div className="flex p-5 bg-white">
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="mb-5">
             <label
               className="mb-2 block text-gray-950 text-[13px] font-sans font-semibold"
@@ -18,6 +41,7 @@ const EditRole = () => {
               type="text"
               name="name"
               id="name"
+              defaultValue={dataFromState.role_name}
               className="w-96 rounded-md border bg-[#F7F7F7] py-3 px-6 text-base font-sans text-text-100"
             />
           </div>
