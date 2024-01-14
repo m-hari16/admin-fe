@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Login from "./pages/Login"
 import AdminLayout from "./layouts/AdminLayout"
+import Home from "./pages/Home"
 
 const App = () => {
   return (
@@ -8,11 +9,11 @@ const App = () => {
       <Routes>
         <Route
           path="/"
-          element={<AdminLayout/>}
+          element={<Home/>}
         />
         <Route
           path="/login"
-          element={<AdminLayout children={<Login/>}/>}
+          element={<Login/>}
         />
 
         <Route
