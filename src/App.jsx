@@ -12,6 +12,9 @@ import EditRole from "./pages/role/EditRole"
 import UserList from "./pages/user/UserList"
 import AddUser from "./pages/user/AddUser"
 import EditUser from "./pages/user/EditUser"
+import ProductList from "./pages/product/ProductList"
+import AddProduct from "./pages/product/AddProduct"
+import EditProduct from "./pages/product/EditProduct"
 
 
 const App = () => {
@@ -47,8 +50,17 @@ const App = () => {
 
         <Route
           path="/admin/product"
-          element={<AdminLayout/>}
+          element={<AdminLayout children={<ProductList/>}/>}
         />
+        <Route
+          path="/admin/product/add"
+          element={<AdminLayout children={<AddProduct/>}/>}
+        />
+        <Route
+          path="/admin/product/edit"
+          element={<AdminLayout children={<EditProduct/>}/>}
+        />
+
         <Route
           path="/admin/stock"
           element={<AdminLayout/>}
