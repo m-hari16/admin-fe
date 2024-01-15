@@ -77,6 +77,25 @@ export const productDelete = async (id) => {
   return toApi.data
 }
 
+/** Stock */
+export const stockList = async () => {
+  const toApi = await setupAxios.get(`api/admin/stock`)
+
+  return toApi.data
+}
+
+export const stockDetail = async (id) => {
+  const toApi = await setupAxios.get(`api/admin/stock/${id}`)
+
+  return toApi.data
+}
+
+export const stockUpdate = async (id, data) => {
+  const toApi = await setupAxios.put(`api/admin/stock/${id}`, data)
+
+  return toApi.data
+}
+
 /** Role */
 export const roleCreate = async (data) => {
   const toApi = await setupAxios.post(`api/admin/role`, data)
