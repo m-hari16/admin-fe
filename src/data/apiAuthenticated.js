@@ -96,6 +96,37 @@ export const stockUpdate = async (id, data) => {
   return toApi.data
 }
 
+/** Purchase */
+export const purchaseCreate = async (data) => {
+  const toApi = await setupAxios.post(`api/admin/purchase`, data)
+
+  return toApi.data
+}
+
+export const purchaseList = async () => {
+  const toApi = await setupAxios.get(`api/admin/purchase`)
+
+  return toApi.data
+}
+
+export const purchaseDetail = async (id) => {
+  const toApi = await setupAxios.get(`api/admin/purchase/${id}`)
+
+  return toApi.data
+}
+
+export const purchaseUpdate = async (id, data) => {
+  const toApi = await setupAxios.put(`api/admin/purchase/${id}`, data)
+
+  return toApi.data
+}
+
+export const purchaseDelete = async (id) => {
+  const toApi = await setupAxios.delete(`api/admin/purchase/${id}`)
+
+  return toApi.data
+}
+
 /** Role */
 export const roleCreate = async (data) => {
   const toApi = await setupAxios.post(`api/admin/role`, data)

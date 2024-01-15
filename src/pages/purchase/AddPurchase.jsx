@@ -1,4 +1,49 @@
+import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { productList, purchaseCreate } from "../../data/apiAuthenticated"
+
 const AddPurchase = () => {
+  const navigate = useNavigate()
+  const [value, setValue] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [formData, setFormData] = useState({
+    qty: '',
+    price: '',
+    product_id: '',
+  })
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const api = await productList();
+        setValue(api.data);
+      } 
+      catch (error) {}
+      finally {
+        setLoading(false);
+      }
+    }
+
+    fetchData()
+  },[])
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.id]: e.target.value
+    })
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    const postData = await purchaseCreate(formData)
+
+    if (postData.data) {     
+      navigate("/admin/purchase")
+    }
+  }
+
   return(
     <>
       <div className="text-lg font-semibold mb-6">
@@ -6,7 +51,7 @@ const AddPurchase = () => {
       </div>
 
       <div className="flex p-5 bg-white">
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="mb-5">
             <label
               className="mb-2 block text-gray-950 text-[13px] font-sans font-semibold"
@@ -17,10 +62,22 @@ const AddPurchase = () => {
               placeholder="Product code"
               type="text"
               name="product_id"
-              id="code"
+              id="product_id"
+              value={formData.product_id}
+              onChange={handleChange}
               className="w-96 rounded-md border bg-[#F7F7F7] py-3 px-6 text-base font-sans text-text-100"
             >
-              <option>Kertas A4</option>
+              <option>---Select one---</option>
+              {
+                loading ? 
+                (<p>Loading...</p>) : 
+                
+                (
+                  value.map((item, idx) => (
+                    <option key={idx} value={item.id}>{item.product_name}</option>
+                  ))
+                )
+              }
             </select>
           </div>
 
@@ -35,6 +92,8 @@ const AddPurchase = () => {
               type="number"
               name="qty"
               id="qty"
+              value={formData.qty}
+              onChange={handleChange}
               className="w-96 rounded-md border bg-[#F7F7F7] py-3 px-6 text-base font-sans text-text-100"
             />
           </div>
@@ -50,6 +109,8 @@ const AddPurchase = () => {
               type="number"
               name="price"
               id="price"
+              value={formData.price}
+              onChange={handleChange}
               className="w-96 rounded-md border bg-[#F7F7F7] py-3 px-6 text-base font-sans text-text-100"
             />
           </div>
