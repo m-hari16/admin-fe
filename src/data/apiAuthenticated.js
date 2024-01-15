@@ -107,3 +107,34 @@ export const roleDelete = async (id) => {
 
   return toApi.data
 }
+
+/** User */
+export const userCreate = async (data) => {
+  const toApi = await setupAxios.post(`api/admin/user`, data)
+
+  return toApi.data
+}
+
+export const userList = async () => {
+  const toApi = await setupAxios.get(`api/admin/user`)
+
+  return toApi.data
+}
+
+export const userDetail = async (id) => {
+  const toApi = await setupAxios.get(`api/admin/user/${id}`)
+
+  return toApi.data
+}
+
+export const userUpdate = async (id, data) => {
+  const toApi = await setupAxios.put(`api/admin/user/${id}`, data)
+
+  return toApi.data
+}
+
+export const userDelete = async (id) => {
+  const toApi = await setupAxios.delete(`api/admin/user/${id}`)
+
+  return toApi.data
+}

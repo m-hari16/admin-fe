@@ -21,6 +21,7 @@ import PurchaseList from "./pages/purchase/PurchaseList"
 import AddPurchase from "./pages/purchase/AddPurchase"
 import EditPurchase from "./pages/purchase/EditPurchase"
 import ProtectedRoute from "./utils/protectedRoute"
+import ProtectedAdministratorRoute from "./utils/administrator"
 
 
 const App = () => {
@@ -103,18 +104,21 @@ const App = () => {
             element={<AdminLayout children={<EditRole/>}/>}
           />
 
-          <Route
-            path="/admin/user"
-            element={<AdminLayout children={<UserList/>}/>}
-          />
-          <Route
-            path="/admin/user/add"
-            element={<AdminLayout children={<AddUser/>}/>}
-          />
-          <Route
-            path="/admin/user/edit"
-            element={<AdminLayout children={<EditUser/>}/>}
-          />
+          <Route element={<ProtectedAdministratorRoute/>}>
+            <Route
+              path="/admin/user"
+              element={<AdminLayout children={<UserList/>}/>}
+            />
+            <Route
+              path="/admin/user/add"
+              element={<AdminLayout children={<AddUser/>}/>}
+            />
+            <Route
+              path="/admin/user/edit"
+              element={<AdminLayout children={<EditUser/>}/>}
+            />
+          </Route>
+
         </Route>
       </Routes>
     </Router>
