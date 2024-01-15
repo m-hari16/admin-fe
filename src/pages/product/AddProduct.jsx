@@ -1,4 +1,52 @@
+import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { categoryList, productCreate } from "../../data/apiAuthenticated"
+
 const AddProduct = () => {
+  const navigate = useNavigate()
+  const [value, setValue] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [formData, setFormData] = useState({
+    code: '',
+    name: '',
+    uom: '',
+    isActive: false,
+    category_id: '',
+  })
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const api = await categoryList();
+        setValue(api.data);
+      } 
+      catch (error) {}
+      finally {
+        setLoading(false);
+      }
+    }
+
+    fetchData()
+  },[])
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.id]: e.target.value
+    })
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    console.log(formData)
+
+    const postData = await productCreate(formData)
+
+    if (postData.data) {     
+      navigate("/admin/product")
+    }
+  }
+
   return(
     <>
       <div className="text-lg font-semibold mb-6">
@@ -6,7 +54,7 @@ const AddProduct = () => {
       </div>
 
       <div className="flex p-5 bg-white">
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="mb-5">
             <label
               className="mb-2 block text-gray-950 text-[13px] font-sans font-semibold"
@@ -18,6 +66,8 @@ const AddProduct = () => {
               type="text"
               name="code"
               id="code"
+              value={formData.code}
+              onChange={handleChange}
               className="w-96 rounded-md border bg-[#F7F7F7] py-3 px-6 text-base font-sans text-text-100"
             />
           </div>
@@ -33,6 +83,8 @@ const AddProduct = () => {
               type="text"
               name="name"
               id="name"
+              value={formData.name}
+              onChange={handleChange}
               className="w-96 rounded-md border bg-[#F7F7F7] py-3 px-6 text-base font-sans text-text-100"
             />
           </div>
@@ -48,6 +100,8 @@ const AddProduct = () => {
               type="text"
               name="uom"
               id="uom"
+              value={formData.uom}
+              onChange={handleChange}
               className="w-96 rounded-md border bg-[#F7F7F7] py-3 px-6 text-base font-sans text-text-100"
             />
           </div>
@@ -62,9 +116,21 @@ const AddProduct = () => {
               placeholder="category"
               name="category_id"
               id="category_id"
+              value={formData.category_id}
+              onChange={handleChange}
               className="w-96 rounded-md border bg-[#F7F7F7] py-3 px-6 text-base font-sans text-text-100"
             >
-              <option>Alat Tulis Kantor (ATK)</option>
+              <option>---Select one---</option>
+              {
+                loading ? 
+                (<p>Loading...</p>) : 
+                
+                (
+                  value.map((item, idx) => (
+                    <option key={idx} value={item.id}>{item.name}</option>
+                  ))
+                )
+              }
             </select>
           </div>
 
@@ -78,10 +144,12 @@ const AddProduct = () => {
               placeholder="Status"
               name="isActive"
               id="isActive"
+              value={formData.isActive}
+              onChange={handleChange}
               className="w-96 rounded-md border bg-[#F7F7F7] py-3 px-6 text-base font-sans text-text-100"
             >
-              <option>Aktif</option>
-              <option>Non Aktif</option>
+              <option value={1}>Aktif</option>
+              <option value={0}>Non Aktif</option>
             </select>
           </div>
 

@@ -9,9 +9,6 @@ const EditUser = () => {
   const [loading, setLoading] = useState(true)
 
   const dataFromState = location.state
-
-  console.log(dataFromState.role.id)
-
   
   useEffect(() => {
     const fetchData = async () => {
@@ -96,7 +93,7 @@ const EditUser = () => {
               placeholder="Input role"
               name="role_id"
               id="role_id"
-              defaultValue={dataFromState.role.name}
+              defaultValue={dataFromState.role.id}
               className="w-96 rounded-md border bg-[#F7F7F7] py-3 px-6 text-base font-sans text-text-100"
             >
               <option value="">---Select one---</option>
