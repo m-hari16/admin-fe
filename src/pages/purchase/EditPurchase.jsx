@@ -47,7 +47,7 @@ const EditPurchase = () => {
               Quantity
             </label>
             <input
-              placeholder="Product name"
+              placeholder="2000.00"
               type="number"
               name="qty"
               id="qty"
@@ -62,7 +62,7 @@ const EditPurchase = () => {
               Price Total
             </label>
             <input
-              placeholder="Product name"
+              placeholder="50500"
               type="number"
               name="price"
               id="price"

@@ -30,9 +30,9 @@ const EditProduct = () => {
 
     const form = event.target;
     const name = form.name.value;
-    const uom = form.name.value;
-    const isActive = form.name.value;
-    const category_id = form.name.value;
+    const uom = form.uom.value;
+    const isActive = form.isActive.value;
+    const category_id = form.category_id.value;
 
 
     const newData = {
@@ -147,9 +147,9 @@ const EditProduct = () => {
               placeholder="Status"
               name="isActive"
               id="isActive"
-              defaultValue={dataFromState.isActive}
               className="w-96 rounded-md border bg-[#F7F7F7] py-3 px-6 text-base font-sans text-text-100"
             >
+              <option value="">---Select one---</option>
               <option value={1} selected={dataFromState.isActive === true}>Aktif</option>
               <option value={0} selected={dataFromState.isActive === false}>Non Aktif</option>
             </select>

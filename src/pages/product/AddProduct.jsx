@@ -38,7 +38,6 @@ const AddProduct = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log(formData)
 
     const postData = await productCreate(formData)
 
