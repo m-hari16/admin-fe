@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { categoryList, productCreate } from "../../data/apiAuthenticated"
+import { useToast } from "../../components/toast/useToast"
 
 const AddProduct = () => {
   const navigate = useNavigate()
@@ -13,6 +14,7 @@ const AddProduct = () => {
     isActive: false,
     category_id: '',
   })
+  const toast = useToast()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,7 +43,8 @@ const AddProduct = () => {
 
     const postData = await productCreate(formData)
 
-    if (postData.data) {     
+    if (postData.data) {   
+      toast('success', 'success create data')  
       navigate("/admin/product")
     }
   }

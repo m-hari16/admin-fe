@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { categoryCreate } from "../../data/apiAuthenticated";
+import { useToast } from "../../components/toast/useToast";
 
 const AddCategory = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
   })
+  const toast = useToast()
 
   const handleChange = (e) => {
     setFormData({
@@ -20,7 +22,8 @@ const AddCategory = () => {
 
     const postData = await categoryCreate(formData)
 
-    if (postData.data) {     
+    if (postData.data) {   
+      toast('success', 'success create data')  
       navigate("/admin/category")
     }
   }

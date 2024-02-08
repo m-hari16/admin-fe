@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { roleList, userCreate } from "../../data/apiAuthenticated";
+import { useToast } from "../../components/toast/useToast";
 
 const AddUser = () => {
   const navigate = useNavigate()
@@ -12,6 +13,7 @@ const AddUser = () => {
     password: '',
     role_id: '',
   })
+  const toast = useToast()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,6 +43,7 @@ const AddUser = () => {
     const postData = await userCreate(formData)
 
     if (postData.data) {     
+      toast('success', 'success create data')
       navigate("/admin/user")
     }
   }
