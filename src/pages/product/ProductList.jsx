@@ -4,10 +4,13 @@ import Pagination from "../../components/paging/paination"
 import { EditIcon, TrashIcon } from "../../assets"
 import { useEffect, useState } from "react"
 import { productDelete, productList } from "../../data/apiAuthenticated"
+import Dialog from "../../components/dialog/Dialog"
 
 const ProductList = () => {
   const [value, setValue] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [open, setOpen] = useState(false)
+  const [itemId, setItemId] = useState('')
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,6 +30,11 @@ const ProductList = () => {
   const handleDelete = async (id) => {
     await productDelete(id)
     window.location.reload();
+  }
+
+  const handleOpen = (id) => {
+    setOpen(!open)
+    setItemId(id)
   }
 
   return(
@@ -75,21 +83,23 @@ const ProductList = () => {
                         <td className="border pl-5">{item.uom}</td>
                         <td className="border pl-5">{item.category.name}</td>
                         <td className="border pl-5">{item.isActive ? 'Tersedia' : 'Tidak Tersedia'}</td>
-                        <td className="border flex justify-center h-16 space-x-2">
-                          <Link
-                            to={`/admin/product/edit?id=${item.id}`}
-                            state={item}
-                            className="w-6 h6"
-                          >
-                            <img src={`${EditIcon}`} alt="edit-data" className="w-full h-full"/>
-                          </Link>
+                        <td className="border">
+                          <div className="flex justify-center h-16 space-x-2">
+                            <Link
+                              to={`/admin/product/edit?id=${item.id}`}
+                              state={item}
+                              className="w-6 h6"
+                            >
+                              <img src={`${EditIcon}`} alt="edit-data" className="w-full h-full"/>
+                            </Link>
 
-                          <button
-                            onClick={() => handleDelete(item.id)}
-                            className="w-6 h6"
-                          >
-                            <img src={`${TrashIcon}`} alt="delete-data" className="w-full h-full"/>
-                          </button>
+                            <button
+                              onClick={() => handleOpen(item.id)}
+                              className="w-6 h6"
+                            >
+                              <img src={`${TrashIcon}`} alt="delete-data" className="w-full h-full"/>
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     ))
@@ -103,6 +113,26 @@ const ProductList = () => {
           <Pagination/>
         </div>
       </div>
+      <Dialog
+        isOpen={open}
+        handler={() => handleOpen('')}
+      >
+        <h2 className="text-lg font-normal text-gray-700">Are you sure want to delete this item?</h2>
+        <div className="flex justify-center space-x-4">
+          <button
+            onClick={() => handleOpen('')}
+            className={`border-2 py-2 px-4 text-sm text-gray-700 rounded hover:bg-gray-200 mt-8`}
+          >
+            No, Cancel
+          </button>
+          <button
+            onClick={() => handleDelete(itemId)}
+            className={`bg-red-500 py-2 px-4 text-sm text-white rounded hover:bg-red-700 mt-8`}
+          >
+            Yes, Delete
+          </button>
+        </div>
+      </Dialog>
     </>
   )
 }
