@@ -1,19 +1,22 @@
 import { Link } from "react-router-dom"
 import SearchBar from "../../components/search/SearchBar"
-import Pagination from "../../components/paging/paination"
 import { EditIcon } from "../../assets"
 import { useEffect, useState } from "react"
 import { stockList } from "../../data/apiAuthenticated"
+import Pagination from "../../components/paging/Pagination"
 
 const StockList = () => {
   const [value, setValue] = useState(null)
+  const [page, setPage] = useState(1)
+  const [totalPage, setTotalPage] = useState()
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const api = await stockList();
-        setValue(api.data);
+        const api = await stockList(`?page=${page}&size=5`);
+        setValue(api.data)
+        setTotalPage(api.pagination.totalPage)
       } 
       catch (error) {}
       finally {
@@ -22,7 +25,7 @@ const StockList = () => {
     }
 
     fetchData()
-  },[])
+  },[page])
 
   return(
     <>
@@ -80,7 +83,11 @@ const StockList = () => {
           }
         </div>
         <div className="flex w-full justify-end pr-5">
-          <Pagination/>
+          <Pagination
+           page={page}
+           setPage={setPage}
+           totalPage={totalPage}
+          />
         </div>
       </div>
     </>

@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom"
 import SearchBar from "../../components/search/SearchBar"
-import Pagination from "../../components/paging/paination"
 import { EditIcon, TrashIcon } from "../../assets"
 import { useEffect, useState } from "react"
 import { userDelete, userList } from "../../data/apiAuthenticated"
 import Dialog from "../../components/dialog/Dialog"
+import Pagination from "../../components/paging/Pagination"
 
 const UserList = () => {
   const [value, setValue] = useState(null)
+  const [page, setPage] = useState(1)
+  const [totalPage, setTotalPage] = useState()
   const [loading, setLoading] = useState(true)
   const [open, setOpen] = useState(false)
   const [itemId, setItemId] = useState('')
@@ -16,7 +18,8 @@ const UserList = () => {
     const fetchData = async () => {
       try {
         const api = await userList();
-        setValue(api.data);
+        setValue(api.data)
+        setTotalPage(api.pagination.totalPage)
       } 
       catch (error) {}
       finally {
@@ -25,7 +28,7 @@ const UserList = () => {
     }
 
     fetchData()
-  },[])
+  },[page])
 
   const handleDelete = async (id) => {
     await userDelete(id)
@@ -106,7 +109,11 @@ const UserList = () => {
           }
         </div>
         <div className="flex w-full justify-end pr-5">
-          <Pagination/>
+          <Pagination
+            page={page}
+            setPage={setPage}
+            totalPage={totalPage}
+          />
         </div>
       </div>
       <Dialog

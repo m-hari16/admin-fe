@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom"
 import SearchBar from "../../components/search/SearchBar"
-import Pagination from "../../components/paging/paination"
 import { EditIcon, TrashIcon } from "../../assets"
 import { useEffect, useState } from "react"
 import { roleDelete, roleList } from "../../data/apiAuthenticated"
 import Dialog from "../../components/dialog/Dialog"
+import Pagination from "../../components/paging/Pagination"
 
 const RoleList = () => {
   const [value, setValue] = useState(null)
+  const [page, setPage] = useState(1)
+  const [totalPage, setTotalPage] = useState()
   const [loading, setLoading] = useState(true)
   const [open, setOpen] = useState(false)
   const [itemId, setItemId] = useState('')
@@ -15,8 +17,9 @@ const RoleList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const api = await roleList();
-        setValue(api.data);
+        const api = await roleList(`?page=${page}&size=5`);
+        setValue(api.data)
+        setTotalPage(api.pagination.totalPage)
       } 
       catch (error) {}
       finally {
@@ -25,7 +28,7 @@ const RoleList = () => {
     }
 
     fetchData()
-  },[])
+  },[page])
 
   const handleDelete = async (id) => {
     await roleDelete(id)
@@ -104,7 +107,11 @@ const RoleList = () => {
           }
         </div>
         <div className="flex w-full justify-end pr-5">
-          <Pagination/>
+          <Pagination
+            page={page}
+            setPage={setPage}
+            totalPage={totalPage}
+          />
         </div>
       </div>
       <Dialog

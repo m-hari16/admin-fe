@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom"
 import SearchBar from "../../components/search/SearchBar"
-import Pagination from "../../components/paging/paination"
 import { EditIcon, TrashIcon } from "../../assets"
 import { purchaseDelete, purchaseList } from "../../data/apiAuthenticated"
 import { useEffect, useState } from "react"
 import Dialog from "../../components/dialog/Dialog"
+import Pagination from "../../components/paging/Pagination"
 
 const PurchaseList = () => {
   const [value, setValue] = useState(null)
+  const [page, setPage] = useState(1)
+  const [totalPage, setTotalPage] = useState()
   const [loading, setLoading] = useState(true)
   const [open, setOpen] = useState(false)
   const [itemId, setItemId] = useState('')
@@ -15,8 +17,9 @@ const PurchaseList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const api = await purchaseList();
-        setValue(api.data);
+        const api = await purchaseList(`?page=${page}&size=5`);
+        setValue(api.data)
+        setTotalPage(api.pagination.totalPage)
       } 
       catch (error) {}
       finally {
@@ -25,7 +28,7 @@ const PurchaseList = () => {
     }
 
     fetchData()
-  },[])
+  },[page])
 
   const handleDelete = async (id) => {
     await purchaseDelete(id)
@@ -111,7 +114,11 @@ const PurchaseList = () => {
         }
         </div>
         <div className="flex w-full justify-end pr-5">
-          <Pagination/>
+          <Pagination
+            page={page}
+            setPage={setPage}
+            totalPage={totalPage}
+          />
         </div>
       </div>
       <Dialog

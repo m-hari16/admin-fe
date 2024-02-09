@@ -125,7 +125,7 @@ const AddProduct = () => {
               <option>---Select one---</option>
               {
                 loading ? 
-                (<p>Loading...</p>) : 
+                (<option>Loading...</option>) : 
                 
                 (
                   value.map((item, idx) => (
