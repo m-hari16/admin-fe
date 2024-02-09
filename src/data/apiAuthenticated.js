@@ -21,8 +21,8 @@ export const categoryCreate = async (data) => {
   return toApi.data
 }
 
-export const categoryList = async () => {
-  const toApi = await setupAxios.get(`api/admin/category`)
+export const categoryList = async (q='') => {
+  const toApi = await setupAxios.get(`api/admin/category${q}`)
 
   return toApi.data
 }
@@ -53,8 +53,8 @@ export const productCreate = async (data) => {
   return toApi.data
 }
 
-export const productList = async () => {
-  const toApi = await setupAxios.get(`api/admin/product`)
+export const productList = async (q='') => {
+  const toApi = await setupAxios.get(`api/admin/product${q}`)
 
   return toApi.data
 }
@@ -78,8 +78,8 @@ export const productDelete = async (id) => {
 }
 
 /** Stock */
-export const stockList = async () => {
-  const toApi = await setupAxios.get(`api/admin/stock`)
+export const stockList = async (q='') => {
+  const toApi = await setupAxios.get(`api/admin/stock${q}`)
 
   return toApi.data
 }
@@ -103,8 +103,8 @@ export const purchaseCreate = async (data) => {
   return toApi.data
 }
 
-export const purchaseList = async () => {
-  const toApi = await setupAxios.get(`api/admin/purchase`)
+export const purchaseList = async (q='') => {
+  const toApi = await setupAxios.get(`api/admin/purchase${q}`)
 
   return toApi.data
 }
@@ -134,8 +134,8 @@ export const roleCreate = async (data) => {
   return toApi.data
 }
 
-export const roleList = async () => {
-  const toApi = await setupAxios.get(`api/admin/role`)
+export const roleList = async (q='') => {
+  const toApi = await setupAxios.get(`api/admin/role${q}`)
 
   return toApi.data
 }
@@ -165,8 +165,8 @@ export const userCreate = async (data) => {
   return toApi.data
 }
 
-export const userList = async () => {
-  const toApi = await setupAxios.get(`api/admin/user`)
+export const userList = async (q='') => {
+  const toApi = await setupAxios.get(`api/admin/user${q}`)
 
   return toApi.data
 }
